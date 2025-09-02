@@ -2,6 +2,9 @@ Phantom Skies: B2 Spirit Edition ✈️🔥
 
 Um jogo de ação vertical-scroller inspirado nos clássicos de fliperama, desenvolvido em HTML5, CSS3 e JavaScript puro, agora com novos modos de tiro progressivos, sistema de vidas, sons imersivos e mecânicas modernas.
 
+<img src="https://github.com/AlexandreSilva78/Phantom-Skies-B2-Spirit-Edition/blob/main/assets/img/Jogo-Phantom-Skies-B2-Spirit-Edition-Notebook.png" style= "width: 350px; height:         350px;">
+
+
 📋 Descrição
 
 Phantom Skies: B2 Spirit Edition é um jogo de ação onde o jogador controla um avião B2 Spirit que avança automaticamente para cima, enfrentando inimigos terrestres e aéreos, recolhendo combustível e sobrevivendo o máximo possível.
@@ -36,7 +39,9 @@ Esc: pausar jogo
 
 T: ativar/desativar modo depuração
 
-Mobile
+Mobile:
+
+<img src:"
 
 Botões de direção na tela para mover
 
