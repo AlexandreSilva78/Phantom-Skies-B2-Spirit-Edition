@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Phantom Skies: B2 Spirit Edition</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="gameCanvas"></canvas>
+
+  <div id="hud">
+    <div id="level-time-container"><span id="level">Nível: 1</span></div>
+
+    <div id="fuel-container">
+      <span id="fuel-icon">⛽</span>
+      <div id="fuel-bar-background"><div id="fuel-bar"></div></div>
+      <span id="fuel-percentage">100%</span>
+    </div>
+
+    <div id="score-container"><span id="score">Pontuação: 0</span></div>
+
+    <!-- NOVO: contador de kills (necessário para main.js) -->
+    <div id="kills-container"><span id="kills">Kills: 0</span></div>
+
+    <div id="shot-mode-container"><span id="shot-mode">Tiro: Simples</span></div>
+
+    <div id="lives-container">
+      <span id="lives-icon">❤️</span>
+      <span id="lives-count">5</span>
+    </div>
+  </div>
+
+  <!-- NOTIFICAÇÕES CENTRAIS (necessário para mensagens como "Modo Triplo Liberado!") -->
+  <div id="notification" class="hidden"></div>
+
+  <div id="game-controls">
+    <button id="startButton">Iniciar</button>
+    <button id="pauseButton">Pausar</button>
+    <button id="restartButton">Reiniciar</button>
+  </div>
+
+  <div id="game-over-screen" class="hidden">
+    <h1>GAME OVER</h1>
+    <p>Pontuação Final: <span id="final-score">0</span></p>
+    <button id="gameOverRestartButton">Reiniciar</button>
+  </div>
+
+  <div id="win-screen" class="hidden">
+    <h1>VITÓRIA!</h1>
+    <p>Parabéns, você alcançou o Nível 99!</p>
+    <p>Pontuação Final: <span id="win-score">0</span></p>
+    <button id="winRestartButton">Reiniciar</button>
+  </div>
+
+  <!-- Mobile controls (mantive os ids originais) -->
+  <div id="mobile-controls">
+    <div id="mobile-dpad">
+      <div id="mobile-up" class="mobile-btn">↑</div>
+      <div id="mobile-left" class="mobile-btn">←</div>
+      <div id="mobile-right" class="mobile-btn">→</div>
+      <div id="mobile-down" class="mobile-btn">↓</div>
+    </div>
+    <div style="display:flex; gap:15px; align-items:center;">
+      <div id="mobile-shoot" class="mobile-btn">🔥</div>
+      <div id="mobile-mode" class="mobile-btn">P</div>
+    </div>
+  </div>
+
+  <script src="./main.js"></script>
+</body>
+</html>

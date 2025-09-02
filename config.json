@@ -1,0 +1,94 @@
+
+
+{
+    "initialFuel": 100,
+    "initialScore": 0,
+    "initialLives": 5,
+    "playerSpeed": 5,
+    "bulletCooldown": 200,
+    "levelDuration": 90,
+    "fuelConsumptionRate": 0.1,
+    "fuelRefillRate": 10,
+    "enemySpawnRate": 2000,
+    "enemySpeed": 2,
+    "bullet": {
+        "width": 10,
+        "height": 20,
+        "speed": 10
+    },
+    "enemyBullet": {
+        "width": 8,
+        "height": 16,
+        "speed": 7
+    },
+    "shotModes": [
+        {
+            "name": "single",
+            "cooldown": 200
+        },
+        {
+            "name": "triple",
+            "cooldown": 300
+        },
+        {
+            "name": "quintuple",
+            "cooldown": 400
+        }
+    ],
+    "enemies": {
+        "enemyPlane": {
+            "width": 64,
+            "height": 64,
+            "points": 150,
+            "shoots": true,
+            "shotCooldown": 1500
+        },
+        "helicopter": {
+            "width": 80,
+            "height": 80,
+            "points": 100,
+            "shoots": true,
+            "shotCooldown": 2000
+        },
+        "ship": {
+            "width": 120,
+            "height": 80,
+            "points": 50,
+            "shoots": false
+        }
+    },
+    "fuelStation": {
+        "width": 60,
+        "height": 60,
+        "speed": 3,
+        "refillRate": 20,
+        "points": 300,
+        "refuelPoints": 50
+    },
+    "powerUp": {
+        "width": 40,
+        "height": 40,
+        "speed": 4,
+        "points": 100,
+        "extraFuelAmount": 30
+    },
+    "maxLevel": 99,
+    "scoreMultiplierPerLevel": 0.1,
+    "initialEnemySpeed": 2,
+    "enemySpeedIncreasePerLevel": 0.3,
+    "initialEnemySpawnRate": 2000,
+    "minEnemySpawnRate": 500,
+    "enemySpawnRateDecreasePerLevel": 150,
+    "fuelConsumptionInterval": 30000,
+    "fuelConsumptionAmount": 10,
+    "fuelWarningThreshold": 30,
+    "fuelCriticalThreshold": 10,
+    "noRefuelGraceSeconds": 30,
+    "emergencyCountdownSeconds": 30,
+    "hitsPerLife": 20,
+    "invulnerabilityDuration": 1500,
+    "backgroundSpeed": 1,
+    "backgroundSpeedIncreasePerLevel": 0.1,
+    "fuelStationSpawnRate": 5000,
+    "powerUpSpawnRate": 8000
+}
