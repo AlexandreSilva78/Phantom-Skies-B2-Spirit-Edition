@@ -9,7 +9,7 @@ let gameConfig = {
   bulletCooldown: 200,
   levelDuration: 90,
   fuelConsumptionInterval: 30000, // ms
-  fuelConsumptionAmount: 10, // percent to subtract each interval
+  fuelConsumptionAmount: 10, // porcentagem para subtrair cada intervalo
   fuelWarningThreshold: 30,
   fuelCriticalThreshold: 10,
   enemySpawnRate: 2000,
@@ -63,10 +63,10 @@ const finalScoreDisplay = document.getElementById("final-score");
 const gameOverRestartButton = document.getElementById("gameOverRestartButton");
 const winScreen = document.getElementById("win-screen");
 const winScoreDisplay = document.getElementById("win-score");
-const notification = document.getElementById("notification"); // central notification
+const notification = document.getElementById("notification"); // central notificação
 
 /* ----------------- Assets ----------------- */
-/* Splash (tela inicial) */
+/* Respingo (tela inicial) */
 const assetPaths = {
   playerPlane: "assets/player/plane_idle.png",
   enemyPlane: "assets/enemies/plane_enemy_1.png",
@@ -89,7 +89,7 @@ const audioPaths = {
   enemyExplosion: "assets/audio/explosao-inimigos.mp3",
   stationExplosion: "assets/audio/explosao.mp3",
 };
-const SFX = {};           // pools
+const SFX = {};           // piscinas
 let audioUnlocked = false;
 
 function createAudioPool(src, poolSize = 8, volume = 0.6) {
@@ -131,13 +131,13 @@ function unlockAudioOnce() {
 window.addEventListener("pointerdown", unlockAudioOnce, { passive: true });
 window.addEventListener("keydown", unlockAudioOnce);
 
-/* Helpers p/ tocar som com segurança */
+/* Ajudantes p/ tocar som com segurança */
 function playSfx(name) {
   const p = SFX[name];
   if (p && typeof p.play === "function") p.play();
 }
 
-/* ----------------- Game State ----------------- */
+/* ----------------- Estado do jogo ----------------- */
 let gameState = {
   running: false,
   paused: false,
@@ -160,10 +160,10 @@ let gameState = {
   screenShake: { intensity: 0, duration: 0 },
 };
 
-/* ----------------- Splash control ----------------- */
+/* ----------------- Controle de respingos ----------------- */
 let showSplash = true;
 
-/* ----------------- Entities ----------------- */
+/* ----------------- Entidades ----------------- */
 let player = null;
 let bullets = [];
 let enemyBullets = [];
@@ -178,12 +178,12 @@ let lastFuelSpawn = 0;
 let lastPowerUpSpawn = 0;
 let debugMode = false;
 
-/* ----------------- Utility ----------------- */
+/* ----------------- Utilitário ----------------- */
 function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 function now() { return performance.now(); }
 function rand(min, max) { return Math.random() * (max - min) + min; }
 
-/* ----------------- Load config.json then init ----------------- */
+/* ----------------- Carregue config.json e então inicie ----------------- */
 async function loadConfig() {
   try {
     const res = await fetch("config.json", { cache: "no-cache" });
@@ -196,7 +196,7 @@ async function loadConfig() {
   }
 }
 
-/* ----------------- Load assets with placeholders ----------------- */
+/* ----------------- Carregar ativos com marcadores de posição ----------------- */
 async function loadAssets() {
   const keys = Object.keys(assetPaths);
   await Promise.all(keys.map(k => new Promise(resolve => {
@@ -219,7 +219,7 @@ async function loadAssets() {
   })));
 }
 
-/* ----------------- Resize canvas ----------------- */
+/* ----------------- Redimensionar tela ----------------- */
 function resizeCanvas() {
   const isMobile = window.innerWidth <= 768;
   if (isMobile) {
@@ -235,7 +235,7 @@ function resizeCanvas() {
   }
 }
 
-/* ----------------- Reset / Init Game ----------------- */
+/* ----------------- Reiniciar / Iniciar jogo ----------------- */
 function resetGame() {
   gameState = {
     running: false,
@@ -285,7 +285,7 @@ function resetGame() {
   draw();
 }
 
-/* ----------------- Input ----------------- */
+/* ----------------- Entrada ----------------- */
 function setupInput() {
   window.addEventListener("keydown", (e) => {
     if (showSplash) {
@@ -321,7 +321,7 @@ function setupInput() {
   });
 }
 
-/* ----------------- Mobile controls ----------------- */
+/* ----------------- Controles móveis ----------------- */
 function setupMobileControls() {
   const mobileUp = document.getElementById("mobile-up");
   const mobileDown = document.getElementById("mobile-down");
@@ -365,7 +365,7 @@ function setupMobileControls() {
   }
 }
 
-/* ----------------- UI Buttons ----------------- */
+/* ----------------- Botões da interface do usuário ----------------- */
 function attachButtons() {
   startButton.addEventListener("click", () => {
     if (showSplash) showSplash = false;
@@ -395,7 +395,7 @@ function togglePause() {
   }
 }
 
-/* ----------------- Game Loop ----------------- */
+/* ----------------- Game Loop / Loop de jogo ----------------- */
 function loop(timestamp) {
   if (!gameState.running || gameState.paused || gameState.gameOver || gameState.win) return;
   const delta = timestamp - gameState.lastTimestamp;
@@ -407,7 +407,7 @@ function loop(timestamp) {
   requestAnimationFrame(loop);
 }
 
-/* ----------------- Update (delta ms) ----------------- */
+/* ----------------- Update (delta ms) / Atualização (delta ms) ----------------- */
 function update(delta) {
   if (gameState.invulnerable) {
     gameState.invulnerableTimer -= delta;
@@ -429,7 +429,7 @@ function update(delta) {
   updateHUD();
 }
 
-/* ----------------- Player movement update ----------------- */
+/* ----------- Player movement update / Atualização de movimento do jogador ----------- */
 function updatePlayerPosition() {
   if (!player) return;
   if (keys["ArrowLeft"] || keys["KeyA"]) player.x -= player.speed;
@@ -496,7 +496,8 @@ function shoot() {
   playSfx("shoot");
 }
 
-/* determine shot mode by kills thresholds (maior desbloqueado) */
+/* determine shot mode by kills thresholds (maior desbloqueado) 
+determinar o modo de disparo pelos limites de mortes */
 function shotModeFromKills() {
   if (gameState.kills >= 500) return 3;
   if (gameState.kills >= 200) return 2;
@@ -504,7 +505,7 @@ function shotModeFromKills() {
   return 0;
 }
 
-/* ----------------- Update bullets ----------------- */
+/* ----------------- Update bullets / Atualizar marcadores ----------------- */
 function updateBullets() {
   bullets = bullets.filter(b => {
     if (b.angle) b.x += Math.sin(b.angle) * b.speed;
@@ -513,7 +514,7 @@ function updateBullets() {
   });
 }
 
-/* ----------------- Enemy bullets ----------------- */
+/* ----------------- Enemy bullets / Balas inimigas ----------------- */
 function updateEnemyBullets() {
   enemyBullets = enemyBullets.filter(b => {
     b.y += b.speed;
@@ -521,7 +522,7 @@ function updateEnemyBullets() {
   });
 }
 
-/* ----------------- Spawn enemy ----------------- */
+/* ----------------- Spawn enemy / Gerar inimigo ----------------- */
 function spawnEnemy() {
   const types = Object.keys(gameConfig.enemies);
   const t = types[Math.floor(Math.random() * types.length)];
@@ -542,7 +543,7 @@ function spawnEnemy() {
   enemies.push(e);
 }
 
-/* ----------------- Update enemies ----------------- */
+/* ----------------- Update enemies / Atualizar inimigos ----------------- */
 function updateEnemies(delta) {
   enemies = enemies.filter(enemy => {
     enemy.y += enemy.speed;
@@ -562,6 +563,7 @@ function updateEnemies(delta) {
 }
 
 /* ----------------- Spawn / Update Fuel Stations ----------------- */
+/* ----------------- Gerar / Atualizar Postos de Combustível ----------------- */
 function spawnFuelStation() {
   const x = Math.random() * (canvas.width - gameConfig.fuelStation.width);
   fuelStations.push({
@@ -583,6 +585,7 @@ function updateFuelStations(delta) {
 }
 
 /* ----------------- Spawn / Update Powerups ----------------- */
+/* ----------------- Gerar/Atualizar Power-ups ----------------- */
 function spawnPowerUp() {
   const types = ["extraFuel", "rapidFire", "shield"];
   const t = types[Math.floor(Math.random() * types.length)];
@@ -604,6 +607,7 @@ function updatePowerUps(delta) {
 }
 
 /* ----------------- Handle Spawning (enemy/fuel/powerup) ----------------- */
+/* ----------------- Geração de Geração (inimigo/combustível/energização) ----------------- */
 function handleSpawning() {
   const nowMs = Date.now();
 
@@ -626,6 +630,7 @@ function handleSpawning() {
 }
 
 /* ----------------- Fuel consumption (delta accum) ----------------- */
+/* ----------------- Consumo de combustível (acumulação delta) ----------------- */
 function updateFuelConsumption(delta) {
   if (!gameState.running || gameState.paused) return;
   gameState.fuelTimer += delta;
@@ -644,7 +649,7 @@ function updateFuelConsumption(delta) {
   }
 }
 
-/* ----------------- When fuel is depleted ----------------- */
+/* ----------------- When fuel is depleted / Quando o combustível está esgotado ----------------- */
 function handleFuelDepletion() {
   gameState.lives--;
   if (gameState.lives <= 0) {
@@ -659,7 +664,7 @@ function handleFuelDepletion() {
   }
 }
 
-/* ----------------- Collisions ----------------- */
+/* ----------------- Collisions / Colisões ----------------- */
 function checkCollisions() {
   // bullets vs enemies
   for (let bi = bullets.length - 1; bi >= 0; bi--) {
@@ -678,7 +683,7 @@ function checkCollisions() {
     }
   }
 
-  // bullets vs fuelStations
+  // bullets vs fuelStations / balas vs postos de combustível
   for (let bi = bullets.length - 1; bi >= 0; bi--) {
     const b = bullets[bi];
     for (let fi = fuelStations.length - 1; fi >= 0; fi--) {
@@ -694,7 +699,7 @@ function checkCollisions() {
     }
   }
 
-  // player vs enemies
+  // player vs enemies / jogador contra inimigos
   if (!gameState.invulnerable) {
     for (let ei = enemies.length - 1; ei >= 0; ei--) {
       const e = enemies[ei];
@@ -707,7 +712,7 @@ function checkCollisions() {
     }
   }
 
-  // player vs enemy bullets
+  // player vs enemy bullets / balas do jogador contra o inimigo
   if (!gameState.invulnerable) {
     for (let bi = enemyBullets.length - 1; bi >= 0; bi--) {
       const b = enemyBullets[bi];
@@ -718,7 +723,7 @@ function checkCollisions() {
     }
   }
 
-  // player vs fuel stations (refuel)
+  // player vs fuel stations (refuel) / jogador vs postos de combustível (reabastecimento)
   for (let fi = fuelStations.length - 1; fi >= 0; fi--) {
     const f = fuelStations[fi];
     if (isColliding(player, f)) {
@@ -732,7 +737,7 @@ function checkCollisions() {
     }
   }
 
-  // player vs powerups
+  // player vs powerups / jogador vs power-ups
   for (let pi = powerUps.length - 1; pi >= 0; pi--) {
     const p = powerUps[pi];
     if (isColliding(player, p)) {
@@ -742,14 +747,15 @@ function checkCollisions() {
   }
 }
 
-/* ----------------- Collision AABB ----------------- */
+/* ----------------- Collision AABB / Colisão AABB ----------------- */
 function isColliding(a, b) {
   if (!a || !b) return false;
   return (a.x < b.x + b.width && a.x + a.width > b.x &&
           a.y < b.y + b.height && a.y + a.height > b.y);
 }
 
-/* ----------------- When enemy destroyed (update kills, levels, lives, shot mode) ----------------- */
+/* ----------- When enemy destroyed (update kills, levels, lives, shot mode) ---------- */
+/* --- Quando o inimigo é destruído (atualização de mortes, níveis, vidas, modo de tiro) --- */
 function onEnemyDestroyed() {
   gameState.kills++;
   if (gameState.kills >= gameState.enemiesForLife) {
@@ -764,6 +770,7 @@ function onEnemyDestroyed() {
 }
 
 /* ----------------- Level up logic based on kills ----------------- */
+/* ----------------- Lógica de subida de nível baseada em mortes ----------------- */
 function levelUp() {
   if (gameState.level >= gameConfig.maxLevel) {
     triggerWin();
@@ -778,6 +785,7 @@ function levelUp() {
 }
 
 /* ----------------- Shot mode unlock notification ----------------- */
+/* ----------------- Notificação de desbloqueio do modo Shot ----------------- */
 let lastShotModeNotified = -1;
 function handleShotModeUnlocks() {
   const mode = shotModeFromKills();
@@ -791,7 +799,7 @@ function handleShotModeUnlocks() {
   }
 }
 
-/* ----------------- Take hit / lose life ----------------- */
+/* ----------------- Take hit / lose life - Levar um golpe / perder a vida ----------------- */
 function takeHit() {
   gameState.hitsTaken++;
   if (gameState.hitsTaken >= (gameConfig.hitsPerLife || 20)) {
@@ -820,7 +828,7 @@ function addScore(points) {
   gameState.score += Math.floor(points * mult);
 }
 
-/* ----------------- Game Over / Win ----------------- */
+/* ----------------- Game Over / Win - Fim do jogo/vitória ----------------- */
 function triggerGameOver() {
   gameState.running = false;
   gameState.gameOver = true;
@@ -834,7 +842,7 @@ function triggerWin() {
   winScreen.classList.remove("hidden");
 }
 
-/* ----------------- Power-up activation ----------------- */
+/* ----------------- Power-up activation - Ativação de inicialização ----------------- */
 function activatePowerUp(type) {
   switch(type) {
     case "extraFuel":
@@ -852,7 +860,7 @@ function activatePowerUp(type) {
   }
 }
 
-/* ----------------- Explosions & particles ----------------- */
+/* ----------------- Explosions & particles - Explosões e partículas ----------------- */
 function createExplosion(x, y) {
   explosions.push({
     x: x - 32, y: y - 32, width: 64, height: 64,
@@ -882,7 +890,7 @@ function updateParticles(delta) {
   });
 }
 
-/* ----------------- Screen shake ----------------- */
+/* ----------------- Screen shake - Tremor de tela ----------------- */
 function addScreenShake(intensity, duration) {
   gameState.screenShake.intensity = Math.max(gameState.screenShake.intensity, intensity);
   gameState.screenShake.duration = Math.max(gameState.screenShake.duration, duration);
@@ -924,6 +932,7 @@ function updateHUD() {
 }
 
 /* ----------------- Show temporary notification center ----------------- */
+/* ----------------- Mostrar centro de notificações temporário ----------------- */
 let notifTimeout = null;
 function showTemporaryMessage(text, ms = 2600) {
   if (!notification) {
@@ -939,7 +948,7 @@ function showTemporaryMessage(text, ms = 2600) {
   }
 }
 
-/* ----------------- Drawing ----------------- */
+/* ----------------- Drawing - Desenho ----------------- */
 function draw() {
   ctx.clearRect(0,0,canvas.width,canvas.height);
   ctx.save();
@@ -1001,7 +1010,7 @@ function draw() {
   if (debugMode) drawDebugInfo();
 }
 
-/* ----------------- Background draw (tile) ----------------- */
+/* ----------------- Background draw (tile) / Desenho de fundo (azulejo) ----------------- */
 let bgY = 0;
 function drawBackground() {
   const bg = assets.skyStrip;
@@ -1015,7 +1024,7 @@ function drawBackground() {
   ctx.drawImage(bg, 0, bgY - bg.height, canvas.width, bg.height);
 }
 
-/* ----------------- Debug info ----------------- */
+/* ----------------- Debug info / Informações de depuração ----------------- */
 function drawDebugInfo() {
   ctx.save();
   ctx.fillStyle = "rgba(0,0,0,0.6)"; ctx.fillRect(10,10,300,140);
@@ -1033,7 +1042,7 @@ function drawDebugInfo() {
   ctx.restore();
 }
 
-/* ----------------- Show splash (title) screen ----------------- */
+/* -------- Show splash (title) screen / Mostrar tela inicial (título) --------- */
 function drawSplashScreen() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const s = assets.splash;
@@ -1053,14 +1062,14 @@ function drawSplashScreen() {
   ctx.fillText("Pressione ENTER para começar", canvas.width / 2, canvas.height - 60);
 }
 
-/* splash animation loop */
+/* splash animation loop / loop de animação inicial */
 function splashLoop() {
   if (!showSplash) return;
   drawSplashScreen();
   requestAnimationFrame(splashLoop);
 }
 
-/* ----------------- Initialization sequence ----------------- */
+/* ----------------- Initialization sequence / Sequência de inicialização ----------------- */
 async function init() {
   await loadConfig();
   await loadAssets();
@@ -1078,7 +1087,7 @@ async function init() {
   console.log("Init completo. Splash visível:", showSplash);
 }
 
-/* ----------------- Kick off init ----------------- */
+/* ----------------- Kick off init / Iniciar inicialização ----------------- */
 init().catch(err => { console.error("Erro inicializando jogo:", err); });
 
-/* ----------------- End of main.js ----------------- */
+/* ----------------- End of main.js / Fim do main.js ----------------- */
