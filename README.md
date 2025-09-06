@@ -1,6 +1,9 @@
-Phantom Skies: B2 Spirit Edition ✈️🔥
+<h1>Phantom Skies: B2 Spirit Edition</h1> ✈️🔥
 
 Um jogo de ação vertical-scroller inspirado nos clássicos de fliperama, desenvolvido em HTML5, CSS3 e JavaScript puro, agora com novos modos de tiro progressivos, sistema de vidas, sons imersivos e mecânicas modernas.
+
+<img src="https://github.com/AlexandreSilva78/Phantom-Skies-B2-Spirit-Edition/blob/main/assets/img/Jogo-Phantom-Skies-B2-Spirit-Edition-Notebook.png" style= "width: 350px; height: 450px;">
+
 
 📋 Descrição
 
@@ -36,13 +39,17 @@ Esc: pausar jogo
 
 T: ativar/desativar modo depuração
 
-Mobile
+Mobile:
+
+<img src="https://github.com/AlexandreSilva78/Phantom-Skies-B2-Spirit-Edition/blob/main/assets/img/Jogo-Phantom-Skies-B2-Spirit-Edition-Tablet.png" style= "width: 350px; height:550px;">
 
 Botões de direção na tela para mover
 
 Botão 🔥 para atirar
 
 Botão P para alternar modo de tiro
+
+<img src="https://github.com/AlexandreSilva78/Phantom-Skies-B2-Spirit-Edition/blob/main/assets/img/Jogo-Phantom-Skies-B2-Spirit-Edition-Iphone-smartphone.png" style= "width: 350px; height:500px;">
 
 🔫 Modos de Tiro Progressivos
 
