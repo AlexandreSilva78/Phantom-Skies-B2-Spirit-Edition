@@ -40,8 +40,9 @@ Esc: pausar jogo
 T: ativar/desativar modo depuração
 
 Mobile:
-
-<img src="https://github.com/AlexandreSilva78/Phantom-Skies-B2-Spirit-Edition/blob/main/assets/img/Jogo-Phantom-Skies-B2-Spirit-Edition-Tablet.png" style= "width: 350px; height:550px;">
+<div align="center">
+    <img src="https://github.com/AlexandreSilva78/Phantom-Skies-B2-Spirit-Edition/blob/main/assets/img/Jogo-Phantom-Skies-B2-Spirit-Edition-Tablet.png" style= "width: 350px; height:550px;">
+</div>
 
 Botões de direção na tela para mover
 
@@ -96,7 +97,7 @@ Método 1: Servidor HTTP Local (Recomendado)
 python3 -m http.server 8000
 
 
-Acesse no navegador: http://localhost:8000
+Acesse no navegador: (https://alexandresilva78.github.io/Phantom-Skies-B2-Spirit-Edition/)
 
 Método 2: Abrir Diretamente
 
